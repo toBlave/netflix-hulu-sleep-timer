@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "Netflix and Hulu Sleep Timer Extension",
+    "version": "1.0",
+    "description": "Sleep Timer for Netflix and Hulu",
+    "page_action": {
+        "default_icon": "Sleeping-Emoticon.png",
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "declarativeContent",
+        "tabs",
+        "notifications",
+        "alarms"
+    ],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": true
+    }
+
+}
