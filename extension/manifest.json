@@ -14,7 +14,7 @@
         "alarms"
     ],
     "background": {
-        "scripts": ["background.js"],
+        "scripts": ["underscore.js", "sleep_timer_urls.js", "background.js"],
         "persistent": true
     }
 

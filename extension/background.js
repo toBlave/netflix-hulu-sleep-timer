@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(function () {
                 // That fires when a page's URL contains a 'g' ...
                 conditions: [
                     new chrome.declarativeContent.PageStateMatcher({
-                        pageUrl: { urlMatches: "(netflix\.com)|(hulu\.com)" }
+                        pageUrl: { urlMatches: SleepTimerURLS.urlMatchExpressions() }
                     })
                 ],
                 // And shows the extension's page action.
@@ -24,16 +24,15 @@ chrome.alarms.onAlarm.addListener(function (alarm) {
                 var tab = tabs[i];
                 var url = tab.url;
 
-                if (url.match(/netflix/)) {
-                    chrome.tabs.update(tab.id, {
-                        url: 'http://www.netflix.com'
-                    });
-                }
-                else if (url.match(/hulu/)) {
-                    chrome.tabs.update(tab.id, {
-                        url: 'http://www.hulu.com'
-                    });
-                }
+                _.detect(SleepTimerURLS.matchURLS, function (urlData) {
+                    if (url.match(new RegExp(urlData.urlMatch))) {
+                        chrome.tabs.update(tab.id, {
+                            url: urlData.sleepTimerUrl
+                        });
+
+                        return true;
+                    }
+                });
             }
         });
     }
